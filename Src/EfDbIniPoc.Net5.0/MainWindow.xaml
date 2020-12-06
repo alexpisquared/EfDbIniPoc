@@ -1,0 +1,47 @@
+﻿<Window x:Class="EfDbIniPoc.Net5._0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EfDbIniPoc.Net5._0"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded" SizeToContent="WidthAndHeight">
+  <Window.Resources>
+    <CollectionViewSource x:Key="lkuGenreViewSource" d:DesignSource="{d:DesignInstance {x:Type local:LkuGenre}, CreateList=True}"/>
+  </Window.Resources>
+  <Grid DataContext="{StaticResource lkuGenreViewSource}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="355" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <DataGrid x:Name="lkuGenreDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="3" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Grid.Row="1">
+      <DataGrid.Columns>
+        <DataGridTextColumn Width="Auto" Header="ID"   Binding="{Binding ID}"   />
+        <DataGridTextColumn Width="Auto" Header="Name" Binding="{Binding Name}" />
+        <DataGridTextColumn Width="*"    Header="Desc" Binding="{Binding Desc}" />
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+      <TextBox x:Name="tbx1" Text="CurLocn" />
+    </StackPanel>
+
+    <StackPanel Grid.Column="1" Grid.RowSpan="3" Orientation="Vertical" HorizontalAlignment="Center">
+      <TextBox x:Name="dbName" Text="zDbIni_Tbx" Margin="3"  VerticalAlignment="Center" FontSize="16" Foreground="#00f"/>
+      <Button Content="_Set Init-r        "	     Margin="3"  Width="150" Click="onSetDbInitialr" ToolTip="Run once lest skip DB Seeding with demo data." />
+      <Label Content="Load:" />
+      <Button Content="Named DB        "	       Margin="3"  Width="150" Click="onTbxNameDbName" ToolTip="Creates DB ...but may skip Seeding" />
+      <Button Content="_Default Name DB"	       Margin="3"  Width="150" Click="onDefaultDbName" ToolTip="Creates DB ...but may skip Seeding" />
+      <Button Content="_Conn Str       "	       Margin="3"  Width="150" Click="onConnStringExp" ToolTip="Creates DB ...but may skip Seeding" />
+      <Button Content="Local C:\temp\tbx "	     Margin="3"  Width="150" Click="onLocalConnStr1" ToolTip="Creates DB ...but may skip Seeding" />
+      <Button Content="Local Unspecd/Dflt"	     Margin="3"  Width="150" Click="onLocalConnStr2" ToolTip="Creates DB ...but may skip Seeding" />
+    </StackPanel>
+  </Grid>
+</Window>
